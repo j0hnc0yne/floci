@@ -58,6 +58,7 @@ floci:
       enabled: true
     lambda:
       enabled: true
+      registry:
     apigateway:
       enabled: true
     iam:

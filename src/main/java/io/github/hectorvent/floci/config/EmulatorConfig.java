@@ -428,6 +428,33 @@ public interface EmulatorConfig {
 
         /** Docker network to attach Lambda containers to. Empty = default bridge. */
         Optional<String> dockerNetwork();
+
+        RegistryConfig registry();
+    }
+
+    interface RegistryConfig {
+        /**
+         * Registry URL (e.g., "registry.example.com", "gcr.io", "registry-1.docker.io" for Docker Hub).
+         * If not specified, defaults to Docker Hub.
+         */
+        Optional<String> url();
+
+        /**
+         * Registry username for authentication.
+         * Can be resolved from environment variables, Docker config.json, or this config.
+         */
+        Optional<String> username();
+
+        /**
+         * Registry password or token for authentication.
+         * Can be resolved from environment variables, Docker config.json, or this config.
+         */
+        Optional<String> password();
+
+        /**
+         * Registry email (optional, mainly for Docker Registry v1 compatibility).
+         */
+        Optional<String> email();
     }
 
     interface Ec2ServiceConfig {

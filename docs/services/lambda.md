@@ -44,7 +44,31 @@ floci:
       code-path: ./data/lambda-code        # ZIP storage location
       poll-interval-ms: 1000
       container-idle-timeout-seconds: 300  # Idle container cleanup
+      registry:                            # Optional: for private Docker registries
+        url: custom.registry.io            # Registry URL (defaults to Docker Hub)
+        username: myuser                   # Registry username
+        password: mytoken                  # Registry password or token
+        email: user@example.com            # Optional email
 ```
+
+### Docker registry credentials
+
+When pulling container images from private registries, Floci supports credentials from multiple sources (priority order):
+
+1. **Environment variables** (highest priority):
+   - `FLOCI_SERVICES_LAMBDA_REGISTRY_URL`
+   - `FLOCI_SERVICES_LAMBDA_REGISTRY_USERNAME`
+   - `FLOCI_SERVICES_LAMBDA_REGISTRY_PASSWORD`
+   - `FLOCI_SERVICES_LAMBDA_REGISTRY_EMAIL`
+
+2. **Docker config.json** (middle priority):
+   - Reads `~/.docker/config.json` automatically
+   - Uses the first registry with auth credentials
+
+3. **YAML config** (lowest priority):
+   - Configured under `floci.services.lambda.registry`
+
+If no credentials are provided, Floci defaults to Docker Hub.
 
 ### Docker socket requirement
 

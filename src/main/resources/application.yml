@@ -78,6 +78,16 @@ floci:
       code-path: ./data/lambda-code
       poll-interval-ms: 1000
       container-idle-timeout-seconds: 300
+      # Docker registry configuration for pulling container images
+      # Credentials can be provided via:
+      # 1. Environment variables: FLOCI_SERVICES_LAMBDA_REGISTRY_URL, FLOCI_SERVICES_LAMBDA_REGISTRY_USERNAME, etc.
+      # 2. Docker config.json (~/.docker/config.json)
+      # 3. This configuration section
+      registry:
+        # url: "custom.registry.io"        # Custom registry URL (defaults to Docker Hub)
+        # username: ""                      # Registry username
+        # password: ""                      # Registry password or token
+        # email: ""                         # Registry email (optional)
     apigateway:
       enabled: true
     iam:
